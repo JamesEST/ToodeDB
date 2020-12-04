@@ -46,28 +46,33 @@
             this.toodeTableBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.toodedDataSet = new ToodeDB.ToodedDataSet();
             this.toodeTableTableAdapter = new ToodeDB.ToodedDataSetTableAdapters.ToodeTableTableAdapter();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.ImgShow = new System.Windows.Forms.Button();
+            this.InfoLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toodeTableBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.toodedDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ToodeBox
             // 
-            this.ToodeBox.Location = new System.Drawing.Point(36, 51);
+            this.ToodeBox.Location = new System.Drawing.Point(12, 12);
             this.ToodeBox.Name = "ToodeBox";
             this.ToodeBox.Size = new System.Drawing.Size(100, 20);
             this.ToodeBox.TabIndex = 0;
             // 
             // HindBox
             // 
-            this.HindBox.Location = new System.Drawing.Point(36, 103);
+            this.HindBox.Location = new System.Drawing.Point(12, 64);
             this.HindBox.Name = "HindBox";
             this.HindBox.Size = new System.Drawing.Size(100, 20);
             this.HindBox.TabIndex = 1;
             // 
             // KogusBox
             // 
-            this.KogusBox.Location = new System.Drawing.Point(36, 77);
+            this.KogusBox.Location = new System.Drawing.Point(12, 38);
             this.KogusBox.Name = "KogusBox";
             this.KogusBox.Size = new System.Drawing.Size(100, 20);
             this.KogusBox.TabIndex = 2;
@@ -76,7 +81,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Nirmala UI", 10.18868F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(142, 54);
+            this.label1.Location = new System.Drawing.Point(118, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(51, 21);
             this.label1.TabIndex = 3;
@@ -86,7 +91,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Nirmala UI", 10.18868F);
-            this.label2.Location = new System.Drawing.Point(142, 80);
+            this.label2.Location = new System.Drawing.Point(118, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 21);
             this.label2.TabIndex = 4;
@@ -96,7 +101,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Nirmala UI", 10.18868F);
-            this.label3.Location = new System.Drawing.Point(142, 106);
+            this.label3.Location = new System.Drawing.Point(118, 67);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(43, 21);
             this.label3.TabIndex = 5;
@@ -105,9 +110,9 @@
             // btn_add
             // 
             this.btn_add.Font = new System.Drawing.Font("Nirmala UI", 10.18868F);
-            this.btn_add.Location = new System.Drawing.Point(36, 169);
+            this.btn_add.Location = new System.Drawing.Point(12, 325);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(97, 43);
+            this.btn_add.Size = new System.Drawing.Size(81, 43);
             this.btn_add.TabIndex = 6;
             this.btn_add.Text = "Lisa uus";
             this.btn_add.UseVisualStyleBackColor = true;
@@ -116,7 +121,7 @@
             // btn_update
             // 
             this.btn_update.Font = new System.Drawing.Font("Nirmala UI", 10.18868F);
-            this.btn_update.Location = new System.Drawing.Point(36, 218);
+            this.btn_update.Location = new System.Drawing.Point(99, 325);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(97, 43);
             this.btn_update.TabIndex = 7;
@@ -127,12 +132,13 @@
             // btn_delete
             // 
             this.btn_delete.Font = new System.Drawing.Font("Nirmala UI", 10.18868F);
-            this.btn_delete.Location = new System.Drawing.Point(36, 267);
+            this.btn_delete.Location = new System.Drawing.Point(199, 325);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(97, 43);
             this.btn_delete.TabIndex = 8;
             this.btn_delete.Text = "Kustuta";
             this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // dataGridView1
             // 
@@ -144,10 +150,10 @@
             this.kogusDataGridViewTextBoxColumn,
             this.hindDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.toodeTableBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(302, 54);
+            this.dataGridView1.Location = new System.Drawing.Point(302, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 45;
-            this.dataGridView1.Size = new System.Drawing.Size(486, 256);
+            this.dataGridView1.Size = new System.Drawing.Size(486, 405);
             this.dataGridView1.TabIndex = 9;
             this.dataGridView1.RowHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_RowHeaderMouseClick);
             // 
@@ -198,11 +204,51 @@
             // 
             this.toodeTableTableAdapter.ClearBeforeFill = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 132);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(284, 187);
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
+            // ImgShow
+            // 
+            this.ImgShow.Font = new System.Drawing.Font("Nirmala UI", 10.18868F);
+            this.ImgShow.Location = new System.Drawing.Point(12, 374);
+            this.ImgShow.Name = "ImgShow";
+            this.ImgShow.Size = new System.Drawing.Size(81, 43);
+            this.ImgShow.TabIndex = 11;
+            this.ImgShow.Text = "Foto";
+            this.ImgShow.UseVisualStyleBackColor = true;
+            this.ImgShow.Click += new System.EventHandler(this.ImgShow_Click);
+            // 
+            // InfoLabel
+            // 
+            this.InfoLabel.AutoSize = true;
+            this.InfoLabel.Location = new System.Drawing.Point(13, 424);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(41, 15);
+            this.InfoLabel.TabIndex = 12;
+            this.InfoLabel.Text = "label4";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(12, 90);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 13;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.InfoLabel);
+            this.Controls.Add(this.ImgShow);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.btn_update);
@@ -218,6 +264,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toodeTableBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.toodedDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,6 +289,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn toodenimetusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn kogusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hindDataGridViewTextBoxColumn;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button ImgShow;
+        private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 
