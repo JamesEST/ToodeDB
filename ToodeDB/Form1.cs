@@ -17,7 +17,7 @@ namespace ToodeDB
    
         SqlConnection con = new SqlConnection(@"Data Source = (LocalDB)\MSSQLLocalDB; AttachDbFilename =|DataDirectory|\AppData\Tooded.mdf; Integrated Security = True");
         SqlCommand cmd;
-        SqlDataAdapter adapter;
+        SqlDataAdapter adapter, adapter2;
         int Id = 0;
         public Form1()
         {
@@ -32,23 +32,18 @@ namespace ToodeDB
             adapter = new SqlDataAdapter("SELECT *FROM Toodetable", con);
             adapter.Fill(tabel);
             dataGridView1.DataSource = tabel;
+            pictureBox1.Image = Image.FromFile("../../Image/Piim.jpg");
+
+            adapter2 = new SqlDataAdapter("SELECT Kategooria_nimetus FROM Kategooria", con);
+            DataTable kat_table = new DataTable();
+            adapter2.Fill(kat_table);
+            foreach(DataRow row in kat_table.Rows)
+            {
+                comboBox1.Items.Add(row["Kategooria_nimetus"]);
+            }
+
             con.Close();
-            con.Open();
-
-            string sqlExpression = "SELECT PictureStr FROM Toodetable";
-
-            SqlCommand command = new SqlCommand(sqlExpression, con);
-            int PhotoWay = command.ExecuteNonQuery();
-            Console.WriteLine("Добавлено объектов: {0}", PhotoWay);
-
-            con.Close();
-
-
-
-
-
-
-
+  
         }
         private void ClearData()
         {
@@ -67,13 +62,14 @@ namespace ToodeDB
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            if (ToodeBox.Text != "" && KogusBox.Text != "" && HindBox.Text != "")
+            if (ToodeBox.Text != "" && KogusBox.Text != "" && HindBox.Text != "" && comboBox1.SelectedItem != null)
             {
-                cmd = new SqlCommand("INSERT INTO Toodetable(Toodenimetus,Kogus,Hind) VALUES (@toode,@kogus,@hind)", con);
+                cmd = new SqlCommand("INSERT INTO Toodetable(Toodenimetus,Kogus,Hind,Kategooria_Id) VALUES (@toode,@kogus,@hind,@kat)", con);
                 con.Open();
                 cmd.Parameters.AddWithValue("@toode", ToodeBox.Text);
                 cmd.Parameters.AddWithValue("@kogus", KogusBox.Text);
                 cmd.Parameters.AddWithValue("@hind", HindBox.Text.Replace(',', '.'));
+                cmd.Parameters.AddWithValue("@kat", (comboBox1.SelectedIndex + 1));
                 cmd.ExecuteNonQuery();
                 con.Close();
                 DisplayData();
@@ -115,8 +111,9 @@ namespace ToodeDB
             ToodeBox.Text = dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
             KogusBox.Text = dataGridView1.Rows[e.RowIndex].Cells[2].Value.ToString();
             HindBox.Text = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
+            string v = dataGridView1.Rows[e.RowIndex].Cells[4].Value.ToString();
+            comboBox1.SelectedIndex = Int32.Parse(v);
             
-
 
 
         }
@@ -161,6 +158,11 @@ namespace ToodeDB
             }
 
             
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
